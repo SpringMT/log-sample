@@ -1,0 +1,62 @@
+linters-settings:
+  govet:
+    check-shadowing: true
+    settings:
+      printf:
+        funcs:
+          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Infof
+          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Warnf
+          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Errorf
+          - (github.com/golangci/golangci-lint/pkg/logutils.Log).Fatalf
+  golint:
+    min-confidence: 0
+  gocyclo:
+    min-complexity: 15
+  maligned:
+    suggest-new: true
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  misspell:
+    locale: US
+  lll:
+    line-length: 160
+  gocritic:
+    enabled-tags:
+      - performance
+      - style
+      - experimental
+    disabled-checks:
+      - wrapperFunc
+
+linters:
+  disable-all: true
+  enable:
+    - govet
+    - errcheck
+    - gosimple
+    - gas
+    - varcheck
+    - ineffassign
+    - deadcode
+    - revive
+    - gocyclo
+    - gofmt
+    - depguard
+    - misspell
+    - lll
+    - unparam
+    - nakedret
+
+run:
+  deadline: 10m
+  skip-files:
+    - ".*test.go$"
+
+# golangci.com configuration
+# https://github.com/golangci/golangci/wiki/Configuration
+service:
+  prepare:
+    - echo "here I can run custom commands, but no preparation needed for this repo"
